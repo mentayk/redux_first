@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {connect} from "react-redux";
+import Card from "./cardItem";
+import Board from "./Board";
+import {Container} from "reactstrap";
 
-function App() {
+
+
+
+function App(props) {
+  console.log(props)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      {/*<Card/>*/}
+     {/*{props.cards.map(el=> el.name)}*/}
+     <Board cards = {props.cards} columns = {props.columns}/>
+    </Container>
   );
 }
 
-export default App;
+const mapStateToProps = (state)=> ({
+  cards: state.cards,
+  columns: state.columns
+})
+
+// const mapDispatchToProps = (dispatch)=> ({
+//   addCard: () => dispatch({type: 'ADD_CARD'})
+// })
+
+export default connect(mapStateToProps) (App);
